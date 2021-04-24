@@ -1,0 +1,47 @@
+{
+  "name": "gatsby-remark-bibtex",
+  "version": "0.0.1",
+  "type": "module",
+  "description": "A plugin for parsing bibtex in Gatsby",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/felipeangelimvieira/gatsby-remark-bibtex.git"
+  },
+  "keywords": [
+    "gatsby",
+    "bibtex",
+    "citation"
+  ],
+  "author": "Felipe Angelim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/felipeangelimvieira/gatsby-remark-bibtex/issues"
+  },
+  "homepage": "https://github.com/felipeangelimvieira/gatsby-remark-bibtex#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.16",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/register": "^7.13.16",
+    "babel-register": "^6.26.0",
+    "jest": "^26.6.3",
+    "mocha": "^8.3.2",
+    "remark": "^13.0.0",
+    "request": "^2.88.2"
+  },
+  "dependencies": {
+    "@orcid/bibtex-parse-js": "0.0.25",
+    "babel-jest": "^26.6.3",
+    "citation-js": "^0.5.0",
+    "core-js": "^3.11.0",
+    "regenerator-runtime": "^0.13.7",
+    "unist-util-visit": "^3.0.0",
+    "unist-util-visit-parents": "^4.0.0"
+  }
+}
