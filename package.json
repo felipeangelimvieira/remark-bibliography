@@ -5,7 +5,7 @@
   "description": "A plugin for parsing bibtex in Gatsby",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/.bin/jest"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --collect-coverage"
   },
   "jest": {
     "testEnvironment": "node"
