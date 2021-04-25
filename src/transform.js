@@ -8,8 +8,9 @@ const visit = require('unist-util-visit');
 
 
 
-const transform = ({template }) => (tree) => {
+const transform = (options) => (tree) => {
 
+    const {template} = options;
     var bibliography = []
         
     visit(tree, 'yaml', visitorBibliography(bibliography, template));
