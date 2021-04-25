@@ -14,12 +14,7 @@ const bibToHtml = (data) => {
     let html = '<div id="references">\n';
 
     data.forEach( (item, index) => {
-        let htmlStr = `\n
-<li id="ref-${item.id}" class="csl-entry">
-${item.bib}
-</li>
-        \n
-        `
+        let htmlStr = `\n<li id="ref-${item.id}" class="csl-entry"> ${item.bib}</li>\n`
 
         html = html + htmlStr
     })

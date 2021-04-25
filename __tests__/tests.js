@@ -6,17 +6,18 @@ import bibtexUtils from "../src/utils.js"
 import  attacher from "../src/attach.js"
 import remarkHtml from 'remark-html'
 
-test('Simple Math Test', () => {
+test('.md output is correct', () => {
     var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
     const processor = remark().use(attacher);
-    
+    const refText = fs.readFileSync("__tests__/data/markdown_with_bibtex_after.md", { encoding : "utf8"});
+
     processor.process(text, (err, actual) => {
         if (err) {
             throw new Error(err);
         }
 
-        console.log(String(actual))
-        fs.writeFileSync("__tests__/data/output.md", actual);
+        var actualText = String(actual)
+        expect(refText).toEqual(actualText);
 
     }) 
     
@@ -24,7 +25,7 @@ test('Simple Math Test', () => {
 });
 
 
-test('Extract bibtex', () => {
+test('extracts bibtex as expected', () => {
     var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
     var extractedBibtex = bibtexUtils.extractBibtex(text);
     expect(extractedBibtex.replace(/\s/g, '')).toBe(`@article{ledoit2004honey,
@@ -49,7 +50,7 @@ test('Extract bibtex', () => {
 });
 
 
-test('Parse useful data from bibtex', () => {
+test('parses info from bibtex as expected', () => {
     var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
     var data = bibtexUtils.getUsefulData(text);
 
