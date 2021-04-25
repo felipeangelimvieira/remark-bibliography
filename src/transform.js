@@ -1,10 +1,10 @@
-import { parseBibliography, hasBibtex, bibToHtml } from './bibliography'
-import { visitorCitation } from './citation' 
-import {visit} from 'unist-util-visit'
+const { parseBibliography, hasBibtex, bibToHtml } = require('./bibliography');
+const { visitorCitation } = require('./citation' );
+const visit = require('unist-util-visit');
 
 // TODO: pass citation functions to another file
 
-export const transform = ({template }) => (tree) => {
+const transform = ({template }) => (tree) => {
 
     let bibliography = []
 
@@ -22,6 +22,4 @@ export const transform = ({template }) => (tree) => {
     visit(tree, 'text', visitorCitation(bibliography))
 };
 
-export default {
-    transform
-}
+module.exports.transform = transform;

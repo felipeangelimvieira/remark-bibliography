@@ -1,6 +1,6 @@
-import {transform} from './transform';
+const {transform} = require('./transform');
 
 const attacher = (template = "apa") => {
   return transform(template);
 };
-export default attacher;
+module.exports = attacher;

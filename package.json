@@ -5,7 +5,7 @@
   "description": "A remark plugin for parsing bibliography and citation.",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/.bin/jest --collect-coverage"
+    "test": "jest --collect-coverage"
   },
   "jest": {
     "testEnvironment": "node"
@@ -47,7 +47,7 @@
     "core-js": "^3.11.0",
     "regenerator-runtime": "^0.13.7",
     "remark-rehype": "^8.1.0",
-    "unist-util-visit": "^3.0.0",
+    "unist-util-visit": "^2.0.3",
     "unist-util-visit-parents": "^4.0.0"
   }
 }
