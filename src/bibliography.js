@@ -1,22 +1,10 @@
 const Cite  = require("citation-js");
-
+const fs = require("fs");
 const BIB_RE = /<bibliography>(.*)<\/bibliography>/gs
 
 
-const extractBibtex = (text) => {
-    
-    var textMatch = text.match(BIB_RE);
-    if (textMatch){
-        // TODO: Make this a depedent on BIB_RE
-        return( textMatch[0].replace("<bibliography>", "").replace("</bibliography>", ""))    
-    }
-    
-    return(null)
-}
+const parseBibliography = (bibtex, template = "apa") => {
 
-const parseBibliography = (text, template = "apa") => {
-
-    const bibtex = extractBibtex(text);
 
     var allCitations = Cite(bibtex).data
     var formattedCitations = [];
@@ -67,12 +55,39 @@ const bibToHtml = (data) => {
 }
 
 
+const visitorBibliography = (bibliography, template) => (node, index, parent) => {
+
+    var text = node.value;
+    var bibPath = text.split("\n").map((value) => {
+  
+       return value.replace(/ /g,'')
+                   .split(":");
+     }).filter((value) => {
+     
+     return value[0] == 'bibliography'});
+  
+     if (bibPath.length > 0) {
+       bibPath = bibPath[0][1];
+  
+       var bibContent = String(fs.readFileSync(bibPath));
+  
+       // Add items to bibliography
+       bibliography.push(...parseBibliography(bibContent, template = template));
+       
+       const newNode = {
+         type : "html",
+         value : bibToHtml(bibliography)
+       };
+  
+       parent.children.push(newNode)
+     } 
+  }
 
 module.exports = {
-    extractBibtex,
     parseBibliography,
     hasBibtex,
     bibToHtml,
+    visitorBibliography,
     BIB_RE
 }
 
