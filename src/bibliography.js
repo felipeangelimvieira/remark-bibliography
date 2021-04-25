@@ -1,6 +1,7 @@
 import Cite from "citation-js";
 
-const BIB_RE = /<bibliography>(.*)<\/bibliography>/gs
+export const BIB_RE = /<bibliography>(.*)<\/bibliography>/gs
+
 
 const extractBibtex = (text) => {
     
@@ -13,7 +14,7 @@ const extractBibtex = (text) => {
     return(null)
 }
 
-const parseBibliography = (text, template = "apa") => {
+export const parseBibliography = (text, template = "apa") => {
 
     const bibtex = extractBibtex(text);
 
@@ -42,8 +43,34 @@ const parseBibliography = (text, template = "apa") => {
     return(formattedCitations)
 }
 
+
+export const hasBibtex = (node) => {
+    return(BIB_RE.test(node.value))
+}
+
+
+
+export const bibToHtml = (data) => {
+    
+    let html = '<div id="references">\n';
+
+    data.forEach( (item, index) => {
+        let htmlStr = `\n<li id="ref-${item.id}" class="csl-entry"> ${item.bib}</li>\n`
+
+        html = html + htmlStr
+    })
+
+    html = html + '\n</div>'
+
+    return(html)
+
+}
+
+
+
 export default {
     extractBibtex,
     parseBibliography,
+    hasBibtex
 }
 
