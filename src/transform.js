@@ -1,8 +1,10 @@
-import bibtexUtils from './utils'
+import bibtexUtils from './bibliography'
 import {visit} from 'unist-util-visit'
 
+// TODO: pass citation functions to another file
+
 const CITATION_RE = /@ref{(.*?)}/g;
-const BIB_RE = /<bibliography>(.*)<\/bibliography>/gs
+
 
 const hasBibtex = (node) => {
     return(BIB_RE.test(node.value))
@@ -52,7 +54,7 @@ export const transform = ({template }) => (tree) => {
 
     const visitorBib = (node) => {
       if (hasBibtex(node) === true) {
-            bibliography= bibtexUtils.getUsefulData(node.value, template = template);
+            bibliography= bibtexUtils.parseBibliography(node.value, template = template);
             node.type="html";
             node.value = bibToHtml(bibliography);
       }
@@ -94,26 +96,6 @@ export const transform = ({template }) => (tree) => {
 
         return [visit.SKIP, index + 2]
         }
-
-        // let children = [];
-        // let child;
-
-        // for (let i = 0; i < node.children.length, i++) {
-        //     child = node.children[i];
-
-        //     if (child.type != "text" || !CITATION_RE.test(child.value)) {
-        //         children.push(child)
-        //     }
-
-        //     const numMatches = child.value.math(CITATION_RE)
-
-        //     let text = child.value;
-        //     for (let j = 0; j < numMatches; j++) {
-        //         text.slice(0,text.indexOf("{"))
-        //     }
-
-
-        // }
         
     visit(tree, `html`, visitorBib);
     visit(tree, 'text', visitorCitation)

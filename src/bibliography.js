@@ -1,16 +1,19 @@
 import Cite from "citation-js";
 
+const BIB_RE = /<bibliography>(.*)<\/bibliography>/gs
+
 const extractBibtex = (text) => {
     
-    var textMatch = text.match(/<bibliography>(.*)<\/bibliography>/gs);
+    var textMatch = text.match(BIB_RE);
     if (textMatch){
+        // TODO: Make this a depedent on BIB_RE
         return( textMatch[0].replace("<bibliography>", "").replace("</bibliography>", ""))    
     }
     
     return(null)
 }
 
-const getUsefulData = (text, template = "apa") => {
+const parseBibliography = (text, template = "apa") => {
 
     const bibtex = extractBibtex(text);
 
@@ -38,18 +41,9 @@ const getUsefulData = (text, template = "apa") => {
 
     return(formattedCitations)
 }
-const parseBibtex = (text) => {
-    return(bibtexParse.toJSON(text));
-}
-
-export const extractBibtexToJson = (text) => {
-    return(parseBibtex(extractBibtex(text)))
-}
 
 export default {
     extractBibtex,
-    parseBibtex,
-    extractBibtexToJson,
-    getUsefulData,
+    parseBibliography,
 }
 

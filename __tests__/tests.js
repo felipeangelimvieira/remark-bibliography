@@ -1,6 +1,7 @@
+
 import fs from "fs"
 import remark from "remark"
-import bibtexUtils from "../src/utils.js"
+import bibtexUtils from "../src/bibliography.js"
 import plugin from "../src/index.js"
 
 test('.md output is correct', () => {
@@ -49,7 +50,7 @@ test('extracts bibtex as expected', () => {
 
 test('parses info from bibtex as expected', () => {
     var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
-    var data = bibtexUtils.getUsefulData(text);
+    var data = bibtexUtils.parseBibliography(text);
 
     expect(data).toEqual([
         {
