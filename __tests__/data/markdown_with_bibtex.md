@@ -5,9 +5,7 @@ author: autor
 
 # This is the first header
 
-Some text, lorem ipsum. I can cite \cite{author1}
-
-algo asf algo
+Some text, lorem ipsum. I can cite @ref{ledoit2004honey} and others.
 
 <bibliography>
 @article{ledoit2004honey,

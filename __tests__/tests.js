@@ -4,16 +4,20 @@ import remark from "remark"
 import asset from "assert"
 import bibtexUtils from "../src/utils.js"
 import  attacher from "../src/attach.js"
-import Cite from "citation-js";
+import remarkHtml from 'remark-html'
 
 test('Simple Math Test', () => {
-    var text = fs.readFileSync("__tests__/data/example1.md", {encoding : "utf8"});
+    var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
     const processor = remark().use(attacher);
     
     processor.process(text, (err, actual) => {
         if (err) {
             throw new Error(err);
         }
+
+        console.log(String(actual))
+        fs.writeFileSync("__tests__/data/output.md", actual);
+
     }) 
     
     
@@ -21,7 +25,7 @@ test('Simple Math Test', () => {
 
 
 test('Extract bibtex', () => {
-    var text = fs.readFileSync("__tests__/data/example1.md", {encoding : "utf8"});
+    var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
     var extractedBibtex = bibtexUtils.extractBibtex(text);
     expect(extractedBibtex.replace(/\s/g, '')).toBe(`@article{ledoit2004honey,
         title={Honey, I shrunk the sample covariance matrix},
@@ -45,17 +49,21 @@ test('Extract bibtex', () => {
 });
 
 
-test('Convert bibtex to APA citation', () => {
-    var text = fs.readFileSync("__tests__/data/example1.md", {encoding : "utf8"});
-    var extractedBibtex = bibtexUtils.extractBibtexToJson(text);
-    
-    var citation = Cite(extractedBibtex).format('bibliography', {
-        format : "text",
-        template: "apa",
-        lang: "en-US"
-    });
+test('Parse useful data from bibtex', () => {
+    var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
+    var data = bibtexUtils.getUsefulData(text);
 
-    console.log(citation);
-    
+    expect(data).toEqual([
+        {
+          id: 'ledoit2004honey',
+          bib: 'Ledoit, O., & Wolf, M. (2004). Honey, I shrunk the sample covariance matrix. The Journal of Portfolio Management, 30(4), 110–119.\n',
+          citation: 'Ledoit & Wolf, 2004'
+        },
+        {
+          id: 'lillicrap2015continuous',
+          bib: 'Lillicrap, T. P., Hunt, J. J., Pritzel, A., Heess, N., Erez, T., Tassa, Y., Silver, D., & Wierstra, D. (2015). Continuous control with deep reinforcement learning. ArXiv Preprint ArXiv:1509.02971.\n',
+          citation: 'Lillicrap et al., 2015'
+        }
+      ])
     
 });

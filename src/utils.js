@@ -1,4 +1,4 @@
-import bibtexParse from '@orcid/bibtex-parse-js';
+import Cite from "citation-js";
 
 const extractBibtex = (text) => {
     
@@ -10,6 +10,34 @@ const extractBibtex = (text) => {
     return(null)
 }
 
+const getUsefulData = (text) => {
+
+    const bibtex = extractBibtex(text);
+
+    var allCitations = Cite(bibtex).data
+    var formattedCitations = [];
+
+    allCitations.forEach( (value) => {
+        let bib =  Cite(value).format('bibliography', {
+            format : "text",
+            template :"apa"
+        });
+
+        let citation = Cite(value).format("citation", {
+            format : "text",
+            template : "apa"
+        }).replace("(", "").replace(")", "");
+
+
+        formattedCitations.push({
+            id: value.id,
+            bib : bib,
+            citation : citation
+        })
+    });
+
+    return(formattedCitations)
+}
 const parseBibtex = (text) => {
     return(bibtexParse.toJSON(text));
 }
@@ -21,6 +49,7 @@ export const extractBibtexToJson = (text) => {
 export default {
     extractBibtex,
     parseBibtex,
-    extractBibtexToJson
+    extractBibtexToJson,
+    getUsefulData,
 }
 
