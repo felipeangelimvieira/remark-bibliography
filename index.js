@@ -1,2 +1,2 @@
-require('babel-runtime'); 
+require('@babel/runtime'); 
 require('./src/index.js')
