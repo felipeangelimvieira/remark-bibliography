@@ -3,7 +3,7 @@
   "version": "0.0.2",
   "type": "module",
   "description": "A remark plugin for parsing bibliography and citation.",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --collect-coverage"
   },
