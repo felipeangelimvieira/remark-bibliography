@@ -7,7 +7,7 @@ A remark plugin that transforms bibtex entry into a html list and citations into
 
 ## Usage
 
-1. Write down the bibtex entries  between `<bibliograpy></bibliography>` tags anywhere in your markdown document. Each entry will be translated to `<li> </li>` components, wrapped in a div of class "references".
+1. Write down the bibtex entries  between `<bibliograpy></bibliography>` tags anywhere in your markdown document. Each entry will be translated to `<li> </li>` component, wrapped in a div with "references" id.
 
 2. Cite using `@ref{youreferenceid}`.
 
