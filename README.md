@@ -11,4 +11,6 @@ A remark plugin that transforms bibtex entry into a html list and citations into
 
 2. Cite using `@ref{youreferenceid}`.
 
-## 
+## Contribute
+
+Feel free to contribute and submit pull requests.
