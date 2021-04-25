@@ -1,6 +1,6 @@
 const {transform} = require('./transform');
 
-const attacher = (template = "apa") => {
+const plugin = (template = "apa") => {
   return transform(template);
 };
-module.exports = attacher;
+export { plugin , transform };
