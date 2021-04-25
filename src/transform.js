@@ -46,13 +46,13 @@ const replaceCitations = (bibliography) => (text) => {
 
 }
 
-export const transform = (tree) => {
+export const transform = ({template }) => (tree) => {
 
     let bibliography = []
 
     const visitorBib = (node) => {
       if (hasBibtex(node) === true) {
-            bibliography= bibtexUtils.getUsefulData(node.value);
+            bibliography= bibtexUtils.getUsefulData(node.value, template = template);
             node.type="html";
             node.value = bibToHtml(bibliography);
       }

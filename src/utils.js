@@ -10,7 +10,7 @@ const extractBibtex = (text) => {
     return(null)
 }
 
-const getUsefulData = (text) => {
+const getUsefulData = (text, template = "apa") => {
 
     const bibtex = extractBibtex(text);
 
@@ -20,12 +20,12 @@ const getUsefulData = (text) => {
     allCitations.forEach( (value) => {
         let bib =  Cite(value).format('bibliography', {
             format : "text",
-            template :"apa"
+            template : template
         });
 
         let citation = Cite(value).format("citation", {
             format : "text",
-            template : "apa"
+            template : template
         }).replace("(", "").replace(")", "");
 
 

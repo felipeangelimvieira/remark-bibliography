@@ -1,14 +1,11 @@
-import {jest} from '@jest/globals'
 import fs from "fs"
 import remark from "remark"
-import asset from "assert"
 import bibtexUtils from "../src/utils.js"
-import  attacher from "../src/attach.js"
-import remarkHtml from 'remark-html'
+import plugin from "../src/index.js"
 
 test('.md output is correct', () => {
     var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
-    const processor = remark().use(attacher);
+    const processor = remark().use(plugin);
     const refText = fs.readFileSync("__tests__/data/markdown_with_bibtex_after.md", { encoding : "utf8"});
 
     processor.process(text, (err, actual) => {
