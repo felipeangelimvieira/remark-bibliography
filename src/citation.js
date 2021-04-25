@@ -1,8 +1,8 @@
-import {visit} from 'unist-util-visit'
+const visit = require('unist-util-visit');
 
 const CITATION_RE = /@ref{(.*?)}/g;
 
-export const replaceCitations = (bibliography) => (text) => {
+const replaceCitations = (bibliography) => (text) => {
 
     const id = text.replace("@ref{",  "").replace("}","");
 
@@ -21,7 +21,7 @@ export const replaceCitations = (bibliography) => (text) => {
     return newText
 }
 
-export const visitorCitation = (bibliography) => (node, index, parent) => {
+const visitorCitation = (bibliography) => (node, index, parent) => {
         
     if (CITATION_RE.test(node.value) != true) {
         return(node)
@@ -58,7 +58,8 @@ export const visitorCitation = (bibliography) => (node, index, parent) => {
     return [visit.SKIP, index + 2]
     }
 
-export default {
+module.exports =  {
+    CITATION_RE,
     replaceCitations,
     visitorCitation
 }

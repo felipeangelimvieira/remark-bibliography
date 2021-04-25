@@ -1,8 +1,8 @@
 
-import fs from "fs"
-import remark from "remark"
-import bibtexUtils from "../src/bibliography.js"
-import plugin from "../src/index.js"
+const fs = require("fs");
+const remark = require("remark");
+const bibtexUtils = require("../src/bibliography.js");
+const plugin = require("../src/index.js");
 
 test('.md output is correct', () => {
     var text = fs.readFileSync("__tests__/data/markdown_with_bibtex.md", {encoding : "utf8"});
