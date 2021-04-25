@@ -13,8 +13,8 @@ const transform = (options) => (tree) => {
     const {template} = options;
     var bibliography = []
         
-    //visit(tree, 'yaml', visitorBibliography(bibliography, template));
-    //visit(tree, 'text', visitorCitation(bibliography))
+    visit(tree, 'yaml', visitorBibliography(bibliography, template));
+    visit(tree, 'text', visitorCitation(bibliography))
 
     
 };
