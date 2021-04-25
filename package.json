@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-remark-bibtex",
+  "name": "remark-bibliography-html",
   "version": "0.0.1",
   "type": "module",
-  "description": "A plugin for parsing bibtex in Gatsby",
-  "main": "index.js",
+  "description": "A remark plugin for parsing bibliography and citation",
+  "main": "src/index.js",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/.bin/jest --collect-coverage"
   },
@@ -19,7 +19,11 @@
     "bibtex",
     "citation"
   ],
-  "author": "Felipe Angelim",
+  "author": {
+    "name": "Felipe Angelim",
+    "email" : "felipeangelim@gmail.com",
+    "url": "https://felipeangelim.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/felipeangelimvieira/gatsby-remark-bibtex/issues"
